@@ -1,0 +1,227 @@
+
+
+================================================================
+== Synthesis Summary Report of 'iris_mlp'
+================================================================
++ General Information: 
+    * Date:           Wed Oct 28 16:20:25 2026
+    * Version:        2026.1 (Build 6493734 on Jun 16 2026)
+    * Project:        hls_2026-iris
+    * Solution:       hls
+    * Product family: zynq
+    * Target device:  xc7z020-clg400-1
+    
+
+* Performance & Resource Estimates: 
++---------------------------------------+------+---------------+----------+---------+------+----------+---------+---------+------+------+--------+-----------+-----------+-----+
+|                Modules                | Issue|               | Iteration|         | Trip |          |      Latency      |      |      |        |           |           |     |
+|                & Loops                | Type | Violation Type|  Latency | Interval| Count| Pipelined| (cycles)|   (ns)  | Slack| BRAM |   DSP  |     FF    |    LUT    | URAM|
++---------------------------------------+------+---------------+----------+---------+------+----------+---------+---------+------+------+--------+-----------+-----------+-----+
+|+ iris_mlp                             |     -|              -|         -|       37|     -|        no|       36|  360.000|  0.65|     -|  9 (4%)|  1125 (1%)|  1102 (2%)|    -|
+| + iris_mlp_Pipeline_VITIS_LOOP_126_1  |     -|              -|         -|       17|     -|       yes|       17|  170.000|  0.65|     -|  4 (1%)|  449 (~0%)|  429 (~0%)|    -|
+|  o VITIS_LOOP_126_1                   |     -|              -|         9|        1|     8|       yes|       15|  150.000|  7.30|     -|       -|          -|          -|    -|
+| + iris_mlp_Pipeline_VITIS_LOOP_151_3  |     -|              -|         -|        9|     -|       yes|        9|   90.000|  0.99|     -|  5 (2%)|  498 (~0%)|  331 (~0%)|    -|
+|  o VITIS_LOOP_151_3                   |     -|              -|         6|        1|     3|       yes|        7|   70.000|  7.30|     -|       -|          -|          -|    -|
+| + iris_mlp_Pipeline_VITIS_LOOP_171_5  |     -|              -|         -|        4|     -|       yes|        4|   40.000|  1.47|     -|       -|   42 (~0%)|  192 (~0%)|    -|
+|  o VITIS_LOOP_171_5                   |     -|              -|         2|        1|     2|       yes|        2|   20.000|  7.30|     -|       -|          -|          -|    -|
++---------------------------------------+------+---------------+----------+---------+------+----------+---------+---------+------+------+--------+-----------+-----------+-----+
+    Name Prefix: '+' for module, 'o' for loop, '*' for dataflow
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++------------+------------+---------------+--------+----------+
+| Interface  | Data Width | Address Width | Offset | Register |
++------------+------------+---------------+--------+----------+
+| s_axi_CTRL | 32         | 6             | 24     | 0        |
++------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++------------+-----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface  | Register  | Offset | Width | Access | Description                      | Bit Fields                                                           |
++------------+-----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_CTRL | CTRL      | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_CTRL | GIER      | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_CTRL | IP_IER    | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_CTRL | IP_ISR    | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_CTRL | ap_return | 0x10   | 32    | R      | Data signal of ap_return         |                                                                      |
+| s_axi_CTRL | x0        | 0x18   | 32    | W      | Data signal of x0                |                                                                      |
+| s_axi_CTRL | x1        | 0x20   | 32    | W      | Data signal of x1                |                                                                      |
+| s_axi_CTRL | x2        | 0x28   | 32    | W      | Data signal of x2                |                                                                      |
+| s_axi_CTRL | x3        | 0x30   | 32    | W      | Data signal of x3                |                                                                      |
++------------+-----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+------------+
+| Argument | Direction | Datatype   |
++----------+-----------+------------+
+| x0       | in        | ap_int<8>  |
+| x1       | in        | ap_int<8>  |
+| x2       | in        | ap_int<8>  |
+| x3       | in        | ap_int<8>  |
+| return   | out       | ap_uint<2> |
++----------+-----------+------------+
+
+* SW-to-HW Mapping
++----------+--------------+----------+-------------------------------------+
+| Argument | HW Interface | HW Type  | HW Info                             |
++----------+--------------+----------+-------------------------------------+
+| x0       | s_axi_CTRL   | register | name=x0 offset=0x18 range=32        |
+| x1       | s_axi_CTRL   | register | name=x1 offset=0x20 range=32        |
+| x2       | s_axi_CTRL   | register | name=x2 offset=0x28 range=32        |
+| x3       | s_axi_CTRL   | register | name=x3 offset=0x30 range=32        |
+| return   | s_axi_CTRL   | register | name=ap_return offset=0x10 range=32 |
++----------+--------------+----------+-------------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++---------------------------------------+-----+--------+---------------+-----------+------------------------+---------+
+| Name                                  | DSP | Pragma | Variable      | Op        | Impl                   | Latency |
++---------------------------------------+-----+--------+---------------+-----------+------------------------+---------+
+| + iris_mlp                            | 9   |        |               |           |                        |         |
+|  + iris_mlp_Pipeline_VITIS_LOOP_126_1 | 4   |        |               |           |                        |         |
+|    icmp_ln126_fu_317_p2               |     |        | icmp_ln126    | seteq     | auto                   | 0       |
+|    add_ln126_fu_323_p2                |     |        | add_ln126     | add       | fabric                 | 0       |
+|    mac_muladd_8s_7s_14s_15_4_1_U3     | 1   |        | product       | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_16s_17_4_1_U5     | 1   |        | product_7     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_16s_17_4_1_U5     | 1   |        | sext_ln132_8  | sext      | dsp_slice              | 3       |
+|    mul_8s_8s_16_1_1_U1                |     |        | product_8     | mul       | auto                   | 0       |
+|    mac_muladd_8s_8s_16s_16_4_1_U4     | 1   |        | product_9     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_14s_15_4_1_U3     | 1   |        | add_ln133     | add       | dsp_slice              | 3       |
+|    mac_muladd_8s_8s_16s_16_4_1_U4     | 1   |        | add_ln133_1   | add       | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_16s_17_4_1_U5     | 1   |        | add_ln133_2   | add       | dsp_slice              | 3       |
+|    accumulator_4_fu_393_p2            |     |        | accumulator_4 | add       | fabric                 | 0       |
+|    mul_17s_25ns_42_1_1_U2             | 1   |        | product_10    | mul       | auto                   | 0       |
+|    magnitude_fu_419_p2                |     |        | magnitude     | sub       | fabric                 | 0       |
+|    magnitude_1_fu_424_p3              |     |        | magnitude_1   | select    | auto_sel               | 0       |
+|    add_ln66_fu_430_p2                 |     |        | add_ln66      | add       | fabric                 | 0       |
+|    sub_ln70_fu_449_p2                 |     |        | sub_ln70      | sub       | fabric                 | 0       |
+|    scaled_fu_455_p3                   |     |        | scaled        | select    | auto_sel               | 0       |
+|    scaled_2_fu_474_p3                 |     |        | scaled_2      | select    | auto_sel               | 0       |
+|    icmp_ln84_fu_492_p2                |     |        | icmp_ln84     | setne     | auto                   | 0       |
+|    hidden_fu_502_p3                   |     |        | hidden        | select    | auto_sel               | 0       |
+|  + iris_mlp_Pipeline_VITIS_LOOP_151_3 | 5   |        |               |           |                        |         |
+|    icmp_ln151_fu_309_p2               |     |        | icmp_ln151    | seteq     | auto                   | 0       |
+|    add_ln151_fu_315_p2                |     |        | add_ln151     | add       | fabric                 | 0       |
+|    sparsemux_7_2_12_1_1_U28           |     |        | accumulator   | sparsemux | onehotencoding_realdef | 0       |
+|    mul_8s_8s_16_1_1_U29               |     |        | product       | mul       | auto                   | 0       |
+|    mul_8s_8s_16_1_1_U30               |     |        | product_1     | mul       | auto                   | 0       |
+|    mac_muladd_8s_8s_16s_17_4_1_U36    | 1   |        | product_2     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_8s_16s_17_4_1_U36    | 1   |        | sext_ln157_10 | sext      | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_16s_16_4_1_U32    | 1   |        | product_3     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_7s_16s_16_4_1_U32    | 1   |        | sext_ln157_13 | sext      | dsp_slice              | 3       |
+|    mul_8s_8s_15_1_1_U31               |     |        | mul_ln157     | mul       | auto                   | 0       |
+|    mac_muladd_8s_5s_12s_13_4_1_U33    | 1   |        | product_4     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_15s_15_4_1_U34    | 1   |        | product_5     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_15s_15_4_1_U34    | 1   |        | sext_ln157_16 | sext      | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_16s_16_4_1_U35    | 1   |        | product_6     | mul       | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_16s_16_4_1_U35    | 1   |        | sext_ln158    | sext      | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_12s_13_4_1_U33    | 1   |        | add_ln158     | add       | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_15s_15_4_1_U34    | 1   |        | add_ln158_1   | add       | dsp_slice              | 3       |
+|    add_ln158_2_fu_415_p2              |     |        | add_ln158_2   | add       | fabric                 | 0       |
+|    mac_muladd_8s_7s_16s_16_4_1_U32    | 1   |        | add_ln158_3   | add       | dsp_slice              | 3       |
+|    mac_muladd_8s_5s_16s_16_4_1_U35    | 1   |        | add_ln158_4   | add       | dsp_slice              | 3       |
+|    mac_muladd_8s_8s_16s_17_4_1_U36    | 1   |        | add_ln158_5   | add       | dsp_slice              | 3       |
+|    add_ln158_6_fu_429_p2              |     |        | add_ln158_6   | add       | fabric                 | 0       |
+|    accumulator_2_fu_438_p2            |     |        | accumulator_2 | add       | fabric                 | 0       |
+|  + iris_mlp_Pipeline_VITIS_LOOP_171_5 | 0   |        |               |           |                        |         |
+|    icmp_ln171_fu_93_p2                |     |        | icmp_ln171    | seteq     | auto                   | 0       |
+|    icmp_ln172_1_fu_99_p2              |     |        | icmp_ln172_1  | seteq     | auto                   | 0       |
+|    select_ln172_fu_122_p3             |     |        | select_ln172  | select    | auto_sel               | 0       |
+|    icmp_ln172_fu_127_p2               |     |        | icmp_ln172    | setgt     | auto                   | 0       |
+|    best_class_1_fu_133_p3             |     |        | best_class_1  | select    | auto_sel               | 0       |
+|    best_score_1_fu_140_p3             |     |        | best_score_1  | select    | auto_sel               | 0       |
+|    i_2_fu_105_p2                      |     |        | i_2           | add       | fabric                 | 0       |
++---------------------------------------+-----+--------+---------------+-----------+------------------------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++---------------------------------------+-----------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+| Name                                  | Usage     | Type      | BRAM | URAM | CE_REG | Pragma | Variable  | Impl | Latency | Bitwidth, Depth, |
+|                                       |           |           |      |      |        |        |           |      |         | Banks            |
++---------------------------------------+-----------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+| + iris_mlp                            |           |           | 0    | 0    |        |        |           |      |         |                  |
+|   CTRL_s_axi_U                        | interface | s_axilite |      |      |        |        |           |      |         |                  |
+|  + iris_mlp_Pipeline_VITIS_LOOP_126_1 |           |           | 0    | 0    |        |        |           |      |         |                  |
+|    B1_U                               | rom_1p    |           |      |      | N      |        | B1        | auto | 1       | 14, 8, 1         |
+|    p_ZL2W1_0_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W1_0 | auto | 1       | 7, 8, 1          |
+|    p_ZL2W1_1_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W1_1 | auto | 1       | 7, 8, 1          |
+|    p_ZL2W1_2_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W1_2 | auto | 1       | 8, 8, 1          |
+|    p_ZL2W1_3_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W1_3 | auto | 1       | 8, 8, 1          |
+|  + iris_mlp_Pipeline_VITIS_LOOP_151_3 |           |           | 0    | 0    |        |        |           |      |         |                  |
+|    p_ZL2W2_0_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_0 | auto | 1       | 8, 3, 1          |
+|    p_ZL2W2_1_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_1 | auto | 1       | 8, 3, 1          |
+|    p_ZL2W2_2_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_2 | auto | 1       | 8, 3, 1          |
+|    p_ZL2W2_3_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_3 | auto | 1       | 7, 3, 1          |
+|    p_ZL2W2_4_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_4 | auto | 1       | 8, 3, 1          |
+|    p_ZL2W2_5_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_5 | auto | 1       | 5, 3, 1          |
+|    p_ZL2W2_6_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_6 | auto | 1       | 5, 3, 1          |
+|    p_ZL2W2_7_U                        | rom_1p    |           |      |      | N      |        | p_ZL2W2_7 | auto | 1       | 5, 3, 1          |
++---------------------------------------+-----------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Ignored Pragmas
++-----------------+-------------------------------+--------------------------------+-----------------+
+| Type            | Options                       | Location                       | Messages        |
++-----------------+-------------------------------+--------------------------------+-----------------+
+| ARRAY_PARTITION | variable=input complete dim=1 | in iris_mlp (iris_mlp.cpp:113) | Not implemented |
+| ARRAY_PARTITION | variable=acc1 complete dim=1  | in iris_mlp (iris_mlp.cpp:119) | Not implemented |
++-----------------+-------------------------------+--------------------------------+-----------------+
+
+* Inferred Pragmas
++-----------------+---------------------------------+----------------------------------------------------------------------------+------------------------------------------+
+| Type            | Options                         | Location                                                                   | Inferred From                            |
++-----------------+---------------------------------+----------------------------------------------------------------------------+------------------------------------------+
+| ARRAY_PARTITION | dim=1 type=complete variable=B2 | variable B2 in iris_mlp (iris_mlp.cpp:44)                                  | syn.array_partition.complete_threshold=4 |
+| PIPELINE        |                                 | loop VITIS_LOOP_171_5 (iris_mlp.cpp:171:23) in iris_mlp (iris_mlp.cpp:171) | syn.compile.pipeline_loops=64            |
++-----------------+---------------------------------+----------------------------------------------------------------------------+------------------------------------------+
+
+* Implemented Pragmas
++-----------------+-------------------------------------+--------------------------------------------------------+
+| Type            | Options                             | Location                                               |
++-----------------+-------------------------------------+--------------------------------------------------------+
+| INLINE          |                                     | in _zl14requantize_q316ap_intili32ee (iris_mlp.cpp:54) |
+| INLINE          |                                     | in _zl13saturate_int86ap_intili32ee (iris_mlp.cpp:82)  |
+| ARRAY_PARTITION | dim=1 type=complete variable=scores | in iris_mlp (iris_mlp.cpp:114)                         |
+| ARRAY_PARTITION | dim=1 type=complete variable=hidden | in iris_mlp (iris_mlp.cpp:120)                         |
++-----------------+-------------------------------------+--------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+-----------------------------------+-------------------------------------+
+| Type            | Options                           | Location                            |
++-----------------+-----------------------------------+-------------------------------------+
+| INLINE          |                                   | in requantize_q31 (iris_mlp.cpp:54) |
+| INLINE          |                                   | in saturate_int8 (iris_mlp.cpp:82)  |
+| INTERFACE       | s_axilite port=x0 bundle=CTRL     | in iris_mlp (iris_mlp.cpp:103)      |
+| INTERFACE       | s_axilite port=x1 bundle=CTRL     | in iris_mlp (iris_mlp.cpp:104)      |
+| INTERFACE       | s_axilite port=x2 bundle=CTRL     | in iris_mlp (iris_mlp.cpp:105)      |
+| INTERFACE       | s_axilite port=x3 bundle=CTRL     | in iris_mlp (iris_mlp.cpp:106)      |
+| INTERFACE       | s_axilite port=return bundle=CTRL | in iris_mlp (iris_mlp.cpp:107)      |
+| ARRAY_PARTITION | variable=scores complete dim=1    | in iris_mlp (iris_mlp.cpp:114)      |
+| ARRAY_PARTITION | variable=hidden complete dim=1    | in iris_mlp (iris_mlp.cpp:120)      |
+| PIPELINE        | ii=1                              | in iris_mlp (iris_mlp.cpp:127)      |
+| PIPELINE        | ii=1                              | in iris_mlp (iris_mlp.cpp:152)      |
++-----------------+-----------------------------------+-------------------------------------+

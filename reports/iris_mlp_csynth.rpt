@@ -1,0 +1,152 @@
+
+
+================================================================
+== Vitis HLS Report for 'iris_mlp'
+================================================================
+* Date:           Wed Oct 28 16:20:24 2026
+
+* Version:        2026.1 (Build 6493734 on Jun 16 2026)
+* Project:        hls_2026-iris
+* Solution:       hls
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.650 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       36|       36|  0.360 us|  0.360 us|   37|   37|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +-----------------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+        |                                               |                                    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+        |                    Instance                   |               Module               |   min   |   max   |    min    |    max    | min | max |        Type       |
+        +-----------------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+        |grp_iris_mlp_Pipeline_VITIS_LOOP_126_1_fu_148  |iris_mlp_Pipeline_VITIS_LOOP_126_1  |       17|       17|   0.170 us|   0.170 us|    0|    0|  loop pipeline stp|
+        |grp_iris_mlp_Pipeline_VITIS_LOOP_151_3_fu_178  |iris_mlp_Pipeline_VITIS_LOOP_151_3  |        9|        9|  90.000 ns|  90.000 ns|    0|    0|  loop pipeline stp|
+        |grp_iris_mlp_Pipeline_VITIS_LOOP_171_5_fu_209  |iris_mlp_Pipeline_VITIS_LOOP_171_5  |        4|        4|  40.000 ns|  40.000 ns|    0|    0|  loop pipeline stp|
+        +-----------------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       -|      -|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        0|    9|    1083|   1060|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       0|     42|    -|
+|Register         |        -|    -|      42|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|    9|    1125|   1102|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    4|       1|      2|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |                    Instance                   |               Module               | BRAM_18K| DSP|  FF | LUT | URAM|
+    +-----------------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |CTRL_s_axi_U                                   |CTRL_s_axi                          |        0|   0|   94|  108|    0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_126_1_fu_148  |iris_mlp_Pipeline_VITIS_LOOP_126_1  |        0|   4|  449|  429|    0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_151_3_fu_178  |iris_mlp_Pipeline_VITIS_LOOP_151_3  |        0|   5|  498|  331|    0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_171_5_fu_209  |iris_mlp_Pipeline_VITIS_LOOP_171_5  |        0|   0|   42|  192|    0|
+    +-----------------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |Total                                          |                                    |        0|   9| 1083| 1060|    0|
+    +-----------------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +-----------+----+-----------+-----+-----------+
+    |    Name   | LUT| Input Size| Bits| Total Bits|
+    +-----------+----+-----------+-----+-----------+
+    |ap_NS_fsm  |  42|          8|    1|          8|
+    +-----------+----+-----------+-----+-----------+
+    |Total      |  42|          8|    1|          8|
+    +-----------+----+-----------+-----+-----------+
+
+    * Register: 
+    +------------------------------------------------------------+---+----+-----+-----------+
+    |                            Name                            | FF| LUT| Bits| Const Bits|
+    +------------------------------------------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                                                   |  7|   0|    7|          0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_126_1_fu_148_ap_start_reg  |  1|   0|    1|          0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_151_3_fu_178_ap_start_reg  |  1|   0|    1|          0|
+    |grp_iris_mlp_Pipeline_VITIS_LOOP_171_5_fu_209_ap_start_reg  |  1|   0|    1|          0|
+    |x0_read_reg_279                                             |  8|   0|    8|          0|
+    |x1_read_reg_274                                             |  8|   0|    8|          0|
+    |x2_read_reg_269                                             |  8|   0|    8|          0|
+    |x3_read_reg_264                                             |  8|   0|    8|          0|
+    +------------------------------------------------------------+---+----+-----+-----------+
+    |Total                                                       | 42|   0|   42|          0|
+    +------------------------------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------+-----+-----+------------+--------------+--------------+
+|      RTL Ports     | Dir | Bits|  Protocol  | Source Object|    C Type    |
++--------------------+-----+-----+------------+--------------+--------------+
+|s_axi_CTRL_AWVALID  |   in|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_AWREADY  |  out|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_AWADDR   |   in|    6|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_WVALID   |   in|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_WREADY   |  out|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_WDATA    |   in|   32|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_WSTRB    |   in|    4|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_ARVALID  |   in|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_ARREADY  |  out|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_ARADDR   |   in|    6|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_RVALID   |  out|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_RREADY   |   in|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_RDATA    |  out|   32|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_RRESP    |  out|    2|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_BVALID   |  out|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_BREADY   |   in|    1|       s_axi|          CTRL|        scalar|
+|s_axi_CTRL_BRESP    |  out|    2|       s_axi|          CTRL|        scalar|
+|ap_clk              |   in|    1|  ap_ctrl_hs|      iris_mlp|  return value|
+|ap_rst_n            |   in|    1|  ap_ctrl_hs|      iris_mlp|  return value|
+|interrupt           |  out|    1|  ap_ctrl_hs|      iris_mlp|  return value|
++--------------------+-----+-----+------------+--------------+--------------+

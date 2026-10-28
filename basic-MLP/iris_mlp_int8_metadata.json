@@ -1,0 +1,14 @@
+{
+    "architecture": "4-8-3",
+    "weight_dtype": "int8",
+    "activation_dtype": "int8",
+    "bias_dtype": "int32",
+    "accumulator_dtype": "int32",
+    "input_scale": 0.024055092353520432,
+    "weight1_scale": 0.01734972751046729,
+    "hidden_scale": 0.0549641781904566,
+    "weight2_scale": 0.015057004342867634,
+    "float_accuracy": 1.0,
+    "quantized_accuracy": 1.0,
+    "prediction_agreement": 1.0
+}

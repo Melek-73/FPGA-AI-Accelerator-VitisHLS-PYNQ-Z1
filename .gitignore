@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Vivado generated files
+.Xil/
+*.jou
+*.log
+*.str
+*.wdb
+*.dcp
+*.ltx
+*.runs/
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# Vitis HLS generated files
+.autopilot/
+solution*/syn/
+solution*/sim/
+solution*/impl/
+csim/build/
+cosim/
+
+# IDE and temporary files
+.ipynb_checkpoints/
+.virtual_documents/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

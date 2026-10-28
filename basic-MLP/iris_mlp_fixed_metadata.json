@@ -1,0 +1,15 @@
+{
+    "architecture": "4-8-3",
+    "weights": "signed INT8",
+    "hidden_activations": "signed INT8",
+    "biases": "signed INT32",
+    "accumulators": "signed INT32",
+    "requant_multiplier": 16306089,
+    "requant_shift": 31,
+    "rounding": "nearest, ties away from zero",
+    "relu": "before INT8 saturation",
+    "input_scale": 0.02405509166419506,
+    "weight1_scale": 0.0173497274518013,
+    "hidden_scale": 0.054964177310466766,
+    "weight2_scale": 0.015057004056870937
+}
